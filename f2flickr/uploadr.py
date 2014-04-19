@@ -399,7 +399,8 @@ class Uploadr:
                 realTags = os.path.dirname(folderTag).split(os.sep)
                 realTags = (' '.join('"' + item + '"' for item in  realTags))
 
-            picTags = '#' + folderTag.replace(' ','#') + ' ' + realTags
+            #picTags = '#' + folderTag.replace(' ','#') + ' ' + realTags
+            picTags = realTags
 
             if exiftags == {}:
                 logging.debug('NO_EXIF_HEADER for %s', image)
