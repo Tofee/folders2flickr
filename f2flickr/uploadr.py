@@ -67,6 +67,7 @@ gif
 png
 avi
 mov
+mp4
 '''.split())
 
 ##
@@ -484,7 +485,7 @@ def grabNewImages(dirname):
     get all images in folders and subfolders which match extensions below
     """
     images = []
-    for dirpath, dirnames, filenames in os.walk(dirname, topdown=True):
+    for dirpath, dirnames, filenames in os.walk(dirname, topdown=True, followlinks=True):
         ignore = '.f2fignore' in filenames
         # use os.stat here
         ignoreglobs = []

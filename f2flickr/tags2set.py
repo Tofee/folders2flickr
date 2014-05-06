@@ -17,7 +17,8 @@ def _creatSet(photoSet, setName, existingSets):
     Creates or updates a set on flickr with the given photos.
     """
     setName = setName[:1].replace('\\','') + setName[1:]
-    setName = setName.replace('/',' ')
+    setName = setName[:1].replace('/','') + setName[1:]
+    #setName = setName.replace('/',' ')
     setName = setName.strip()
     photos = [] #real photo objects
     for photo in photoSet:
