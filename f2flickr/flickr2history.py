@@ -78,6 +78,9 @@ def reshelf(images,  imageDir, historyFile):
         flickrtag = '#' + image.replace(' ','#')
         photo = getPhotoIDbyTag(flickrtag, user)
         logging.debug(image)
+	if not photo:
+            flickrtag = '"#' + str(image) + '"'
+            photo = getPhotoIDbyTag(flickrtag, user)
         if not photo:
             uploaded.close()  # flush the DB file
             continue

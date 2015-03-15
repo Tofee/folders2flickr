@@ -67,7 +67,6 @@ gif
 png
 avi
 mov
-mp4
 '''.split())
 
 ##
@@ -153,10 +152,10 @@ def buildRequest(theurl, fields, files):
     return urllib2.Request(theurl, body, txheaders)
 
 class APIConstants:
-    base = "http://flickr.com/services/"
+    base = "https://flickr.com/services/"
     rest   = base + "rest/"
     auth   = base + "auth/"
-    upload = base + "upload/"
+    upload = "https://up.flickr.com/services/upload/"
 
     token = "auth_token"
     secret = "secret"
@@ -393,15 +392,14 @@ class Uploadr:
 
             # this is needed for later syncing flickr with folders
             # look for / \ _ . and replace them with SPACE to make real Tags
-            realTags = re.sub(r'[/\\_.]', ' ',
-                          os.path.dirname(folderTag)).strip()
+            realTags = re.sub(r'[/\\_.]', ' ', folderTag).strip()
+            picTags = '#' + realTags.replace(' ','#')
 
+            # with the full_folder_tags option, the tag for the file is directly its
+            # relative path. We use quotes to make it only one tag on Flickr.
             if configdict.get('full_folder_tags', 'false').startswith('true'):
-                realTags = os.path.dirname(folderTag).split(os.sep)
-                realTags = (' '.join('"' + item + '"' for item in  realTags))
-
-            #picTags = '#' + folderTag.replace(' ','#') + ' ' + realTags
-            picTags = realTags
+                realTags = '"#' + folderTag + '"' 
+                picTags = realTags
 
             if exiftags == {}:
                 logging.debug('NO_EXIF_HEADER for %s', image)
