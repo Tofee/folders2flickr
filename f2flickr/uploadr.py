@@ -63,9 +63,11 @@ XPKEYWORDS = 'Image XPKeywords'
 # file extensions that will be uploaded (compared as lower case)
 ALLOWED_EXT = set('''
 jpg
+jpeg
 gif
 png
 avi
+mp4
 mov
 '''.split())
 
